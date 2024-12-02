@@ -3,7 +3,6 @@ import SantaVideo from "../assets/SantaVideo.mp4";
 import Logo from "../assets/ess-group-logo.webp";
 import QuestionPic from "../assets/thumbnail_image.png";
 import React from "react";
-require("dotenv").config();
 
 const Dec2 = () => {
   const [showQuestion, setShowQuestion] = useState(false);
