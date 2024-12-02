@@ -50,3 +50,8 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
+const port = process.env.PORT || 5000;  // Om det inte finns någon PORT-miljövariabel, använd 5000 lokalt
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
