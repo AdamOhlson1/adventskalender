@@ -55,3 +55,7 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+app.get('/dec1', (req, res) => {
+  res.send('Here is the content for December 1');
+});
+
