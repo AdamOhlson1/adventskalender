@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { Client } = require("pg");
+const path = require("path");
 require('dotenv').config();
 
 // Anslut till PostgreSQL-databasen
@@ -40,22 +41,21 @@ app.post("/api/save-answer", async (req, res) => {
   }
 });
 
-// Starta servern
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+// Servera statiska filer från React build-mappen
+app.use(express.static(path.join(__dirname, 'client/dist')));
+
+// API-endpoint för att serva innehållet för /dec1
+app.get('/dec1', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist', 'index.html')); // Skicka den byggda React-filen
 });
 
-
+// Root route
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
-const port = process.env.PORT || 5000;  // Om det inte finns någon PORT-miljövariabel, använd 5000 lokalt
+// Starta servern
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
-
-app.get('/dec1', (req, res) => {
-  res.send('Here is the content for December 1');
-});
-
